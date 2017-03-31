@@ -1,0 +1,229 @@
+/* $toolbar-width: 98px;
+
+.toolbar {
+	position: fixed;
+	bottom: 50px;
+	left: 50%;
+	margin-left: -$toolbar-width / 2;
+
+	a {
+		display: block;
+		width: $toolbar-width;
+		height: $toolbar-width;
+		position: relative;
+		margin-top: 1px;
+	}
+
+	.weixin:after {
+		content: '';
+		background: url('../images/code.gif') no-repeat;
+	}
+
+	.app:after {
+		content: '';
+		background: url('../images/code.gif') no-repeat;
+	}
+	
+	.weixin {
+		.toolbar-btn {
+			&:before {
+				content: '\e63f';
+			}
+		}
+	}
+	.feedback {
+		.toolbar-btn {
+			&:before {
+				content: '\e63e';
+			}
+		}
+	}
+	.app {
+		.toolbar-btn {
+			&:before {
+				content: '\e60c';
+			}
+		}
+	}
+	.top {
+		.toolbar-btn {
+			&:before {
+				content: '\e648';
+			}
+		}
+	}
+
+	.toolbar-btn {
+		position: absolute;
+		left: 0; 
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+
+		font-family:"iconfont" !important;
+  		font-size:16px;
+	 	font-style:normal;
+ 		-webkit-font-smoothing: antialiased;
+  		-moz-osx-font-smoothing: grayscale;
+
+		&:before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: $toolbar-width;
+			height: $toolbar-width;
+			line-height: $toolbar-width;
+			text-align: center;
+			background: #d0d6d9;
+		}
+
+		&:after {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: $toolbar-width;
+			background: #98a1a6;
+		}
+	}
+} */
+
+
+@import 'mixin';
+$toolbar-width: 98px;
+.toolbar {
+    width: $toolbar-width;
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    margin-left: -$toolbar-width / 2;
+    a {
+        display: block;
+        width: $toolbar-width;
+        height: $toolbar-width;
+        margin-top: 1px;
+        position: relative;
+        &:after {
+            content: '';
+            width: 302px;
+            height: 356px;
+            position: absolute;
+            left: -302px;
+            top: 0;
+            opacity: 0;
+            @include transform-origin(right top);
+            @include transform-scale(0);
+            @include transition(all 1s);             
+        }
+
+        &:hover .toolbar-btn:before {
+			top: -$toolbar-width;
+        }
+
+        &:hover .toolbar-btn:after {
+			top: 0;
+        }
+
+        &:hover:after {
+            opacity: 1;
+            @include transform-scale(1);
+        }
+    }
+    .toolbar-btn {
+    	&, &:before {
+	        width: 100%;
+	        height: 100%;		
+    	}
+		&, &:before, &:after {
+	        position: absolute;
+	        left: 0;
+		}
+		
+		&:before, &:after {
+            content: '';
+            text-align: center;
+            color: #fff;
+			
+		}
+        top: 0;
+        overflow: hidden;
+        font-family: "iconfont" !important;
+		font-size: 16px;
+		font-style: normal;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		 
+        &:before {
+            top: 0;
+/*             width: $toolbar-width;
+            height: $toolbar-width;
+             */  
+            line-height: $toolbar-width;
+            font-size: 30px;
+            background: #d0d6d9;
+            @include transition(top 1s); 
+        }
+
+        &:after {
+            top: $toolbar-width;
+            padding-top: 30px;
+            width: $toolbar-width;
+            height: $toolbar-width - 30px;
+            color: #fff;
+            background: #95a0a5;
+            @include transition(top 1s);
+            white-space: pre-wrap;
+        }
+    }
+	.weixin {
+		.toolbar-btn {
+			&:before {
+				content: "\e63f"; 
+			}
+			&:after {
+				content:'公众\A账号';		
+			}
+		}
+
+		&:after {
+            background: url('../images/code.gif') no-repeat;
+		}
+	}
+	
+	.feedback {
+		.toolbar-btn {
+			&:before {
+				content: "\e63e"; 
+			}
+			&:after {
+				content:'意见\A反馈';		
+			}
+		}
+	}
+	
+	.app {
+		.toolbar-btn {
+			&:before {
+				content: "\e60c"; 
+			}
+			&:after {
+				content:'app\A下载';		
+			}
+		}
+
+		&:after {
+            background: url('../images/code.gif') no-repeat;
+		}
+	}
+	.top {
+		.toolbar-btn {
+			&:before {
+				content: "\e648"; 
+			}
+			&:after {
+				content:'返回\A顶部';		
+			}
+		}		
+	}
+}

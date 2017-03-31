@@ -1,0 +1,84 @@
+@import '_mixin';
+
+%code-hover {
+	opacity: 1;
+	@include transform-scale(1);
+}
+
+%background-img {
+		background-image: url('../images/icons.gif');
+		background-repeat: no-repeat;
+}
+
+$tollbar-width: 26px;
+
+.tollbar {
+	width: $tollbar-width;
+	position: fixed;
+	bottom: 20px;
+	left: 50%;
+	margin-left: -$tollbar-width / 2;
+
+	a {
+		position: relative;
+		display: block;
+		width: 100%;
+		height: 56px;
+		margin-top: 1px;
+		@include transition(background-position 0.3s);		
+		@extend %background-img;
+		&:hover span{
+			@extend %code-hover;		
+		}
+	}
+
+	span {
+		position: absolute;
+		right: $tollbar-width;
+		bottom: 0;
+		width: 141px;
+		height: 203px;
+		opacity: 0;
+		@include transform-scale(0.01);
+		background-position: 0 0;
+		@include transform-origin(135px 175px);
+		@include transition(all 1s);
+		@extend %background-img;
+	}
+}
+
+@mixin bg-position($pos, $hover-pos) {
+	background-position: 0 $pos;
+	&:hover {
+		background-position: 0 $hover-pos;
+	}	
+}
+
+$map: (
+	weixin: -222px -526px,
+	feedback: -278px -582px,
+	app: -336px -640px,
+	top: -393px -697px
+);
+
+@each $key, $value in $map {
+	.#{$key} {
+		@include bg-position(nth($value,1), nth($value,2))
+	}
+}
+/* 
+.weixin {
+	@include bg-position(-222px, -526px);
+}
+
+.feedback {
+	@include bg-position(-278px, -582px);
+}
+
+.app {
+	@include bg-position(-336px, -640px);
+}
+
+.top {
+	@include bg-position(-393px, -697px);
+} */
